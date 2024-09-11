@@ -1,0 +1,10 @@
+{
+    "java.import.gradle.java.home": "/usr/lib/jvm/java-19-openjdk-amd64",
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "android-webview-debug.adbPath": "/home/alumno/Android/Sdk/platform-tools/adb",
+    "editor.minimap.enabled": false,
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    "files.autoSave": "afterDelay",
+    "editor.tabSize": 2,
+    "editor.mouseWheelZoom": true,
+}
