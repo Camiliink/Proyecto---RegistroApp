@@ -1,0 +1,126 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title #titulo size="large">
+      Sistema de Asistencia DUOC
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="centrar">
+    <div class="enmarcar ion-text-center" #page>
+
+      <ion-toolbar class="ion-padding-top">
+        <h1 *ngIf="usuario.cuenta.trim() !== ''">
+          ¡Bienvenido(a) 
+          {{ usuario.nombre }} 
+          {{ usuario.apellido }}!
+        </h1>
+        <h1 *ngIf="usuario.cuenta.trim() == ''">
+          Para usar el sistema debe llenar sus datos
+        </h1>
+        <h2>
+          Mis datos personales
+        </h2>
+      </ion-toolbar>
+      
+      <ion-item #itemCuenta>
+        <ion-input [(ngModel)]="usuario.cuenta"
+            label="Cuenta" labelPlacement="floating"
+            placeholder="Ej: atorres"></ion-input>
+      </ion-item>
+
+      <ion-item #itemNombre>
+        <ion-input [(ngModel)]="usuario.nombre" 
+            label="Nombre" labelPlacement="floating"
+            placeholder="Ej: Ana"></ion-input>
+      </ion-item>
+
+      <ion-item #itemApellido>
+        <ion-input [(ngModel)]="usuario.apellido"
+            label="Apellido" labelPlacement="floating"
+            placeholder="Ej: Torres"></ion-input>
+      </ion-item>
+
+      <ion-item #itemEducacion class="font-size-12">
+        <ion-select [(ngModel)]="usuario.nivelEducacional!.id"
+            (ionChange)="actualizarNivelEducacional($event)"
+            label="Educación" position="floating">
+          <ion-select-option *ngFor="let nivelEducacional of listaNivelesEducacionales" 
+            [value]="nivelEducacional.id">
+              {{nivelEducacional.nombre}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item #itemFechaNacimiento class="ion-padding-bottom">
+        <table>
+          <tr>
+            <td class="font-size-12" >
+              Nacimiento
+            </td>
+            <td class="cell-align-right">
+              <input
+                matInput 
+                [matDatepicker]="fechaNacimiento" 
+                [(ngModel)]="usuario.fechaNacimiento"
+                placeholder="dd/mm/yyyy"
+                class="date-width">
+            </td>
+            <td class="cell-width-0">
+              <mat-datepicker-toggle matSuffix [for]="fechaNacimiento"></mat-datepicker-toggle>
+              <mat-datepicker #fechaNacimiento></mat-datepicker>
+            </td>
+          </tr>
+        </table>
+      </ion-item>
+
+      <ion-button shape="round" size="small"
+          (click)="limpiarAnimandoDerIzq()">
+        Limpiar Izq Der
+      </ion-button>
+
+      <ion-button shape="round" size="small"
+          (click)="limpiarAnimandoRotacion()">
+        Limpiar Rotando
+      </ion-button>
+
+      <ion-button shape="round" size="small"
+          (click)="animarVueltaDePagina()">
+        Vuelta hoja
+      </ion-button>
+
+      <ion-button shape="round" size="small"
+          (click)="mostrarDatosPersona()">
+        Ver datos
+      </ion-button>
+
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="primary" class="ion-text-center">
+    
+    <ion-button shape="round" size="small" color="tertiary"
+        (click)="navegar('/inicio')">
+      <ion-icon slot="start" name="home"></ion-icon>
+      Inicio
+    </ion-button>
+
+    <ion-button shape="round" size="small" color="tertiary"
+        (click)="navegar('/leerqr')"
+        [disabled]="usuario.cuenta.trim() === ''">
+      <ion-icon slot="start" name="qr-code"></ion-icon>
+      Asistencia
+    </ion-button>
+
+    <ion-button shape="round" size="small" color="tertiary"
+        (click)="navegar('/login')">
+      <ion-icon slot="start" name="log-out"></ion-icon>
+      Salir
+    </ion-button>
+
+  </ion-toolbar>
+</ion-footer>
+

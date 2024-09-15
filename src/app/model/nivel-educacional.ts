@@ -13,7 +13,7 @@ export class NivelEducacional {
     this.nombre = nombre;
   }
 
-  public getNivelEducacional(id: number, nombre: string): NivelEducacional {
+  public static getNivelEducacional(id: number, nombre: string): NivelEducacional {
     const nivel = new NivelEducacional();
     nivel.setNivelEducacional(id, nombre);
     return nivel;
@@ -21,21 +21,21 @@ export class NivelEducacional {
 
   public static getNivelesEducacionales(): NivelEducacional[] {
     const niveles: NivelEducacional[] = [
-      new NivelEducacional().getNivelEducacional(1, 'Básica Incompleta'),
-      new NivelEducacional().getNivelEducacional(2, 'Básica Completa'),
-      new NivelEducacional().getNivelEducacional(3, 'Media Incompleta'),
-      new NivelEducacional().getNivelEducacional(4, 'Media Completa'),
-      new NivelEducacional().getNivelEducacional(5, 'Superior Incompleta'),
-      new NivelEducacional().getNivelEducacional(6, 'Superior Completa')
+      NivelEducacional.getNivelEducacional(1, 'Básica Incompleta'),
+      NivelEducacional.getNivelEducacional(2, 'Básica Completa'),
+      NivelEducacional.getNivelEducacional(3, 'Media Incompleta'),
+      NivelEducacional.getNivelEducacional(4, 'Media Completa'),
+      NivelEducacional.getNivelEducacional(5, 'Superior Incompleta'),
+      NivelEducacional.getNivelEducacional(6, 'Superior Completa')
     ];
     return niveles;
   }
   
-  public getTextoNivelEducacional(): string {
+  public getEducacion(): string {
     return this.id.toString() + ' - ' + this.nombre;
   }
 
-  public static findNivelEducacionalById(id: number): NivelEducacional | undefined {
+  public static buscarNivelEducacional(id: number): NivelEducacional | undefined {
     return NivelEducacional.getNivelesEducacionales().find(n => n.id === id);
   }
 

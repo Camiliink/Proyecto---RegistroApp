@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, NavigationExtras } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { NivelEducacional } from 'src/app/model/nivel-educacional';
-import { Persona } from 'src/app/model/persona';
 import { Usuario } from 'src/app/model/usuario';
 
 @Component({
@@ -10,51 +8,32 @@ import { Usuario } from 'src/app/model/usuario';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
 
   public usuario: Usuario;
 
-  constructor(private router: Router, private toastController: ToastController) {
-    this.usuario = new Usuario('', '', '', '', '', '', '', 
-      NivelEducacional.findNivelEducacionalById(1)!, undefined);
+  constructor(
+      private router: Router
+    , private activatedRoute: ActivatedRoute
+    , private toastController: ToastController) 
+  {
+    this.usuario = new Usuario();
+    this.usuario.recibirUsuario(activatedRoute, router);
     this.usuario.cuenta = 'atorres';
     this.usuario.password = '1234';
   }
 
-  public ngOnInit(): void {
-    //if (this.usuario.correo !== '') this.ingresar();
+  ingresar() {
+    const error = this.usuario.validarUsuario();
+    if(error) {
+      this.mostrarMensajeEmergente(error);
+      return;
+    } 
+    this.mostrarMensajeEmergente('¡Bienvenido(a) al Sistema de Asistencia DUOC!');
+    this.usuario.navegarEnviandousuario(this.router, '/inicio');
   }
 
-  public ingresar(): void {
-    if (this.usuario) {
-
-      if(!this.validarUsuario(this.usuario)) return;
-      
-      const usu: Usuario | undefined = this.usuario.buscarUsuarioValido(
-        this.usuario.cuenta, this.usuario.password);
-
-      if (usu) {
-        const navigationExtras: NavigationExtras = {
-          state: {
-            usuario: usu
-          }
-        };
-        this.mostrarMensaje('¡Bienvenido(a)!');
-        this.router.navigate(['/inicio'], navigationExtras); // Navegamos hacia el Inicio y enviamos la información extra
-      }
-    }
-  }
-
-  public validarUsuario(usuario: Usuario): boolean {
-    const mensajeError = usuario.validarUsuario();
-    if (mensajeError) {
-      this.mostrarMensaje(mensajeError);
-      return false
-    }
-    return true;
-  }
-
-  async mostrarMensaje(mensaje: string, duracion?: number) {
+  async mostrarMensajeEmergente(mensaje: string, duracion?: number) {
     const toast = await this.toastController.create({
         message: mensaje,
         duration: duracion? duracion: 2000
