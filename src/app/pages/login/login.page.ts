@@ -22,6 +22,9 @@ export class LoginPage {
     this.usuario.cuenta = 'atorres';
     this.usuario.password = '1234';
   }
+  public ingresarValidarCorreo(): void {
+    this.router.navigate(['/correo']);
+  }
 
   ingresar() {
     const error = this.usuario.validarUsuario();
