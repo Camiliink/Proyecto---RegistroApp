@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Pregunta de Seguridad</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-subtitle>Pregunta de seguridad para {{ correo }}</ion-card-subtitle>
+    
+    <!-- Mostrar la pregunta de seguridad -->
+    <ion-item>
+      <ion-label position="floating">Pregunta</ion-label>
+      <ion-input type="text" [value]="pregunta" disabled></ion-input>
+    </ion-item>
+
+    <!-- Campo para la respuesta del usuario -->
+    <ion-item>
+      <ion-label position="floating">Respuesta</ion-label>
+      <ion-input type="text" [(ngModel)]="respuesta"></ion-input>
+    </ion-item>
+    
+    <!-- Botón para verificar la respuesta -->
+    <ion-button expand="full" (click)="verificarRespuesta()">Recuperar contraseña</ion-button>
+  </ion-card>
+</ion-content>
