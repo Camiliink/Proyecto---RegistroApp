@@ -1,3 +1,4 @@
+
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
@@ -7,12 +8,12 @@ import { AnimationController} from '@ionic/angular';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
-  selector: 'app-inicio',
-  templateUrl: 'inicio.page.html',
-  styleUrls: ['inicio.page.scss'],
+  selector: 'app-misdatos',
+  templateUrl: './misdatos.page.html',
+  styleUrls: ['./misdatos.page.scss'],
 })
 
-export class InicioPage implements AfterViewInit {
+export class MisdatosPage implements AfterViewInit {
 
   @ViewChild('titulo', { read: ElementRef }) itemTitulo!: ElementRef;
   @ViewChild('page', { read: ElementRef }) page!: ElementRef;
@@ -77,8 +78,9 @@ export class InicioPage implements AfterViewInit {
       .create()
       .addElement(this.itemTitulo.nativeElement)
       .iterations(Infinity)
-      .duration(10000)
+      .duration(6000)
       .fromTo('transform', 'translate(0%)', 'translate(100%)')
+      .fromTo('opacity', 0.2, 1)
       .play();
   }
 
@@ -164,3 +166,4 @@ export class InicioPage implements AfterViewInit {
   }
 
 }
+

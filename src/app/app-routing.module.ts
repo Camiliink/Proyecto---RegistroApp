@@ -26,7 +26,11 @@ const routes: Routes = [
   {
     path: 'pregunta',
     loadChildren: () => import('./pages/pregunta/pregunta.module').then( m => m.PreguntaPageModule)
+  },  {
+    path: 'misdatos',
+    loadChildren: () => import('./pages/misdatos/misdatos.module').then( m => m.MisdatosPageModule)
   },
+
 ];
 
 @NgModule({
