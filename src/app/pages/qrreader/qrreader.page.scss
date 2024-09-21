@@ -71,6 +71,7 @@ ion-button {
   color: #FFFFFF;
   text-align: left;
 }
+
 .tabla-asistencia td {
   animation: fadeIn 0.5s forwards;
   opacity: 0; /* Oculta por defecto */
@@ -80,6 +81,7 @@ ion-button {
 .show-table td {
   opacity: 1;
 }
+
 .grow {
   animation: grow 0.3s forwards;
 }
@@ -97,4 +99,21 @@ ion-button {
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+/* Asegura que el footer esté al fondo */
+ion-app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Hacer que ocupe toda la altura de la ventana */
+}
+
+ion-content {
+  flex: 1; /* Permite que el contenido ocupe el espacio disponible */
+  overflow: auto; /* Agrega desplazamiento si el contenido es demasiado largo */
+}
+
+footer {
+  background-color: #132CAA; /* Color de fondo del footer */
+  color: #FFFFFF; /* Color del texto */
 }
