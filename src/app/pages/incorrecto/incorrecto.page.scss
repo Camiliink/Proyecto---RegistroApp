@@ -1,0 +1,53 @@
+
+.correcto {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 70px;
+  width: 40%;
+}
+
+.centro-texto{
+    display: flex;
+    flex-direction: column;
+    align-items: center; // Horizontal
+    justify-content: center; // Vertical
+    height: 100%;
+    color:#FFFFFF;
+}
+
+.titulo{
+  font-weight: bold; // Hacer el texto en negrita
+  font-size: 25px; // Ajusta el tamaño según sea necesario
+  text-align: center; // Centrar el texto
+  color:#FFFFFF;
+  margin-bottom: px;
+}
+
+.boton{
+  font-weight: bold; // Hacer el texto en negrita
+  font-size: 24px; // Ajusta el tamaño según sea necesario
+  text-align: center; // Centrar el texto
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+
+.logo-container {
+  display: flex;           // Usar flexbox
+  justify-content: center; // Centrar horizontalmente
+  align-items: center;     // Centrar verticalmente (opcional)
+  margin-top: 20px;       // Ajustar el espacio superior según sea necesario
+}
+
+.logo {
+  max-width: 100%; // Asegurarte de que el logo no exceda el ancho del contenedor
+  height: auto;    // Mantener la proporción del logo
+}
+
+.footer {
+  background-color: #1A1A1A; /* Color negro de la paleta */
+  color: #FFFFFF; /* Texto en blanco para el footer */
+  padding: 20px; /* Ajusta el padding según sea necesario */
+  text-align: center; /* Centra el texto dentro del footer */
+}

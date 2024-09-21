@@ -1,0 +1,59 @@
+
+.correcto {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 70px;
+  width: 40%;
+}
+
+.centro-texto{
+    display: flex;
+    flex-direction: column;
+    align-items: center; // Horizontal
+    justify-content: center; // Vertical
+    height: 100%;
+    color:#FFFFFF;
+}
+
+.titulo{
+  font-weight: bold;
+  font-size: 25px; 
+  text-align: center; 
+  color:#FFFFFF;
+  margin-bottom: px;
+}
+
+.boton{
+  font-weight: bold;
+  font-size: 20px; 
+  text-align: center; 
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+
+.logo-container {
+  display: flex;          
+  justify-content: center; 
+  align-items: center;     
+  margin-top: 20px;       
+}
+
+.logo {
+  max-width: 100%; 
+  height: auto;   
+}
+
+.footer {
+  background-color: #1A1A1A;
+  color: #FFFFFF; 
+  padding: 20px; 
+  text-align: center;
+}
+
+.password{
+  color: red;
+  font-size: 32px;
+
+}

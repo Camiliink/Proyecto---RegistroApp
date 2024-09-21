@@ -51,10 +51,27 @@ export class PreguntaPage implements OnInit,AfterViewInit {
   }
 
   verificarRespuesta() {
+    const usuario: Usuario | undefined = Usuario.buscarUsuarioPorCorreo(this.correo);
+  
     if (this.respuesta.trim().toLowerCase() === this.respuestaCorrecta.trim().toLowerCase()) {
-      alert('Respuesta correcta. Tu contraseña es: ' + Usuario.buscarUsuarioPorCorreo(this.correo)!.password);
+      if (usuario) {
+        this.router.navigate(['/correcto'], {   
+          state: { 
+            password: usuario.password,
+            nombre: usuario.nombre,
+            apellido: usuario.apellido
+          }
+        });
+      }
     } else {
-      alert('Respuesta incorrecta. Inténtalo de nuevo.');
+      if (usuario) {
+        this.router.navigate(['/incorrecto'], {
+          state: {
+            nombre: usuario.nombre,
+            apellido: usuario.apellido
+          }
+        });
+      }
     }
   }
 }
