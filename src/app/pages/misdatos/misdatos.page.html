@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="warning">
     <ion-title #titulo size="large">
       Sistema de Asistencia DUOC
     </ion-title>
@@ -7,21 +7,21 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-toolbar color="primary" class="ion-text-center">
+  <ion-toolbar  class="ion-text-center">
     
-    <ion-button shape="round" size="small" color="tertiary"
+    <ion-button shape="round" size="small" color="warning"
         (click)="navegar('/inicio')">
       <ion-icon slot="start" name="home"></ion-icon>
       Inicio
     </ion-button>
-    <ion-button shape="round" size="small" color="tertiary"
+    <ion-button shape="round" size="small" color="warning"
         (click)="navegar('/misdatos')">
         <ion-icon name="accessibility-outline"></ion-icon>
        Mis Datos
     </ion-button>
     
 
-    <ion-button shape="round" size="small" color="tertiary"
+    <ion-button shape="round" size="small" color="warning"
         (click)="navegar('/login')">
       <ion-icon slot="start" name="log-out"></ion-icon>
       Salir
@@ -98,22 +98,22 @@
         </table>
       </ion-item>
 
-      <ion-button shape="round" size="small"
+      <ion-button shape="round" size="small" color="warning"
           (click)="limpiarAnimandoDerIzq()">
         Limpiar Izq Der
       </ion-button>
 
-      <ion-button shape="round" size="small"
+      <ion-button shape="round" size="small" color="warning"
           (click)="limpiarAnimandoRotacion()">
         Limpiar Rotando
       </ion-button>
 
-      <ion-button shape="round" size="small"
+      <ion-button shape="round" size="small" color="warning"
           (click)="animarVueltaDePagina()">
         Vuelta hoja
       </ion-button>
 
-      <ion-button shape="round" size="small"
+      <ion-button shape="round" size="small" color="warning"
           (click)="mostrarDatosPersona()">
         Ver datos
       </ion-button>

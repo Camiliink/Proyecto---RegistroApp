@@ -1,6 +1,6 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title #titulo size="large" style="font-size: larger;">
+<ion-header >
+  <ion-toolbar color="warning">
+    <ion-title #titulo size="large" style="font-size: 20px; color: black" >
       Sistema de Asistencia DUOC UC
     </ion-title>
   </ion-toolbar>
@@ -8,21 +8,19 @@
 
 <ion-content [fullscreen]="true">
 
-  <ion-toolbar color="primary" class="ion-text-center">
+  <ion-toolbar class="ion-text-center">
     
-    <ion-button shape="round" size="small" color="tertiary"
+    <ion-button shape="round" size="small" color="warning"
         (click)="navegar('/inicio')">
       <ion-icon slot="start" name="home"></ion-icon>
       Inicio
     </ion-button>
-    <ion-button shape="round" size="small" color="tertiary"
+    <ion-button shape="round" size="small" color="warning"
         (click)="navegar('/misdatos')">
         <ion-icon name="accessibility-outline"></ion-icon>
        Mis Datos
     </ion-button>
-    
-
-    <ion-button shape="round" size="small" color="tertiary"
+    <ion-button shape="round" size="small" color="warning"
         (click)="navegar('/login')">
       <ion-icon slot="start" name="log-out"></ion-icon>
       Salir
@@ -42,25 +40,28 @@
       </ion-toolbar>
 
     </div>
-    <h1 class="ion-text-center"> Registra tu asistencia a clases </h1>
+    <h1 class="ion-text-center" style="margin: 2rem 0;"> Registra tu asistencia a clases </h1>
 
     <ion-row class="ion-justify-content-center">
-      <ion-button shape="round" size="small" color="tertiary"
-        (click)="navegar('/qrreader')"
-        [disabled]="usuario.cuenta.trim() === ''">
-      <ion-icon slot="start" name="qr-code"></ion-icon>
-      Comienza escaneo QR para registrar asistencia
-      </ion-button>
+      <ion-button #mensajeQR shape="round" size="large" color="warning" style="margin: 3rem 0;"
+              (click)="navegar('/qrreader')"
+              [disabled]="usuario.cuenta.trim() === ''">
+            <ion-icon slot="start" name="qr-code"></ion-icon>
+            Comienza escaneo QR
+      </ion-button>     
     </ion-row>
+    </div>
 
-  </div>
+
+  <ion-footer style="margin-top: auto;">
+    <ion-card>
+    <div class="enmarcar ion-text-center">
+      <img alt="DUOC" src="../../../assets/img/Logo_Duoc.png" style="height: 120px;"/> 
+    </div>
+    </ion-card>
+  </ion-footer>
 
 </ion-content>   
 
-<ion-footer>
-  <div class="enmarcar ion-text-center">
-    <img alt="DUOC" src="../../../assets/img/Logo_Duoc.png" style="height: 120px;"   /> 
-  </div>
-  
-</ion-footer>
+
 
