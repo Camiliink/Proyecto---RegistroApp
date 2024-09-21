@@ -26,6 +26,7 @@ export class MisdatosPage implements AfterViewInit {
   public listaNivelesEducacionales = NivelEducacional.getNivelesEducacionales();
   
   public usuario: Usuario;
+  MensajeDatos: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -39,7 +40,6 @@ export class MisdatosPage implements AfterViewInit {
 
   ngAfterViewInit() {
     this.animarTituloIzqDer();
-    this.animarVueltaDePagina();
   }
 
   public actualizarNivelEducacional(event: any) {
@@ -57,20 +57,11 @@ export class MisdatosPage implements AfterViewInit {
 
   limpiarAnimandoDerIzq() {
     this.limpiarPagina();
-    this.animarDerIzq(this.itemCuenta.nativeElement, 100);
-    this.animarDerIzq(this.itemNombre.nativeElement, 200);
-    this.animarDerIzq(this.itemApellido.nativeElement, 300);
+    this.animarDerIzq(this.itemCuenta.nativeElement, 400);
+    this.animarDerIzq(this.itemNombre.nativeElement, 400);
+    this.animarDerIzq(this.itemApellido.nativeElement, 400);
     this.animarDerIzq(this.itemEducacion.nativeElement, 400);
-    this.animarDerIzq(this.itemFechaNacimiento.nativeElement, 500);
-  }
-
-  limpiarAnimandoRotacion() {
-    this.limpiarPagina();
-    this.animarRotacion(this.itemCuenta.nativeElement, 800);
-    this.animarRotacion(this.itemNombre.nativeElement, 1100);
-    this.animarRotacion(this.itemApellido.nativeElement, 1400);
-    this.animarRotacion(this.itemEducacion.nativeElement, 1700);
-    this.animarRotacion(this.itemFechaNacimiento.nativeElement, 2000);
+    this.animarDerIzq(this.itemFechaNacimiento.nativeElement, 400);
   }
 
   animarTituloIzqDer() {
@@ -91,28 +82,6 @@ export class MisdatosPage implements AfterViewInit {
       .iterations(1)
       .duration(duration)
       .fromTo('transform', 'translate(100%)', 'translate(0%)')
-      .play();
-  }
-
-  animarRotacion(elementRef: any, duration: number) {
-    this.animationController
-      .create()
-      .addElement(elementRef)
-      .iterations(1)
-      .duration(duration)
-      .fromTo('transform', 'rotate(0deg)', 'rotate(360deg)')
-      .play();
-  }
-
-  animarVueltaDePagina() {
-    this.animationController
-      .create()
-      .addElement(this.page.nativeElement)
-      .iterations(1)
-      .duration(1000)
-      .fromTo('transform', 'rotateY(deg)', 'rotateY(-180)')
-      .duration(1000)
-      .fromTo('transform', 'rotateY(-180deg)', 'rotateY(0deg)')
       .play();
   }
 
@@ -164,6 +133,8 @@ export class MisdatosPage implements AfterViewInit {
   navegar(pagina: string) {
     this.usuario.navegarEnviandousuario(this.router, pagina);
   }
+
+
 
 }
 
