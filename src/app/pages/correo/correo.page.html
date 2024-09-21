@@ -1,14 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>correo</ion-title>
+    <ion-title>Correo</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content #pageContent>
   <ion-card>
     <ion-card-subtitle>Ingresa tu correo</ion-card-subtitle>
-    <ion-input type="text" [(ngModel)]="correo" placeholder="ingresa tu correo"></ion-input>
-    <a (click)="ingresarPaginaValidarRespuestaSecreta()">Recuperar contraseña</a>
+    <ion-input type="text" placeholder="Ingresa tu correo" [(ngModel)]="correo"></ion-input> 
+    <ion-button (click)="ingresarPaginaValidarRespuestaSecreta()">Recuperar contraseña</ion-button>
   </ion-card>
-  
 </ion-content>
