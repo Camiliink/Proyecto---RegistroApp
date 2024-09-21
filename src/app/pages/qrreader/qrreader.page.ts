@@ -1,16 +1,16 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Usuario } from 'src/app/model/usuario';
 import jsQR, { QRCode } from 'jsqr';
 import { Asistencia } from 'src/app/interfaces/asistencia';
+
 @Component({
   selector: 'app-qrreader',
   templateUrl: './qrreader.page.html',
   styleUrls: ['./qrreader.page.scss'],
 })
-
 export class QrreaderPage implements OnInit {
-  
+
   @ViewChild('video') private video!: ElementRef;
   @ViewChild('canvas') private canvas!: ElementRef;
 
@@ -18,11 +18,13 @@ export class QrreaderPage implements OnInit {
   public asistencia: Asistencia | undefined = undefined;
   public escaneando = false;
   public datosQR: string = '';
+  public palabras: string[] = [];
+  private indexPalabra: number = 0;
+  public filasVisibles: boolean[] = []; // Para controlar la visibilidad de las filas
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) { 
+  constructor(private activatedRoute: ActivatedRoute, private router: Router) {
     this.usuario = new Usuario();
     this.usuario.recibirUsuario(activatedRoute, router);
-
   }
 
   ngOnInit() {
@@ -31,7 +33,7 @@ export class QrreaderPage implements OnInit {
 
   public async comenzarEscaneoQR() {
     const mediaProvider: MediaProvider = await navigator.mediaDevices.getUserMedia({
-      video: {facingMode: 'environment'}
+      video: { facingMode: 'environment' }
     });
     this.video.nativeElement.srcObject = mediaProvider;
     this.video.nativeElement.setAttribute('playsinline', 'true');
@@ -71,6 +73,34 @@ export class QrreaderPage implements OnInit {
   public mostrarDatosQROrdenados(datosQR: string): void {
     this.datosQR = datosQR;
     this.asistencia = JSON.parse(datosQR);
+    this.palabras = ['Has', 'quedado', 'presente', 'en', 'tu', 'clase'];
+    this.indexPalabra = 0;
+    this.filasVisibles = Array(this.palabras.length).fill(false); // Inicializa todas las filas como no visibles
+    this.mostrarPalabraPorTiempo();
+  }
+
+  public mostrarPalabraPorTiempo(): void {
+    if (this.indexPalabra < this.palabras.length) {
+      setTimeout(() => {
+        // Muestra dos filas por cada palabra
+        this.filasVisibles[this.indexPalabra * 2] = true;   // Primera fila
+        this.filasVisibles[this.indexPalabra * 2 + 1] = true; // Segunda fila
+        this.indexPalabra++;
+        this.mostrarPalabraPorTiempo();
+      }, 500); // Cambia el tiempo de espera según tus necesidades
+    }
+  }
+
+  public mostrarPalabra(word: string): string {
+    return this.indexPalabra > this.palabras.indexOf(word) ? 'inline' : 'none';
+  }
+
+  public mostrarColumna(columna: string): string {
+    return 'table-cell'; // O 'none' según la lógica
+  }
+
+  public filaVisible(index: number): string {
+    return this.filasVisibles[index] ? 'table-row' : 'none'; // Controla la visibilidad de las filas
   }
 
   public detenerEscaneoQR(): void {
@@ -80,6 +110,4 @@ export class QrreaderPage implements OnInit {
   navegar(pagina: string) {
     this.usuario.navegarEnviandousuario(this.router, pagina);
   }
-
-
 }

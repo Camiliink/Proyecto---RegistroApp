@@ -72,3 +72,30 @@ ion-button {
   color: #FFFFFF;
   text-align: left;
 }
+.tabla-asistencia td {
+  animation: fadeIn 0.5s forwards;
+  opacity: 0; /* Oculta por defecto */
+}
+
+/* Aplica la animación a las celdas de la tabla cuando se muestre */
+.show-table td {
+  opacity: 1;
+}
+.grow {
+  animation: grow 0.3s forwards;
+}
+
+@keyframes grow {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.05); }
+}
+
+.show-table td {
+  animation: fadeIn 0.5s forwards;
+  opacity: 0; /* Oculta por defecto */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

@@ -25,52 +25,58 @@
   </div>
 
   <div *ngIf="datosQR" class="margin-top">
-    <h1> Has quedado presente en tu clase </h1>
+    <h1>
+      <span *ngFor="let palabra of palabras" [style.display]="mostrarPalabra(palabra)">
+        {{ palabra }} 
+      </span>
+    </h1>
+  
     <table class="tabla-asistencia">
       <tbody>
-        <tr>
-          <td>Bloque Inicio</td>
-          <td>{{ asistencia!.bloqueInicio }}</td>
+        <tr [style.display]="filaVisible(0)">
+          <td [style.display]="mostrarColumna('Bloque Inicio')">Bloque Inicio:</td>
+          <td [style.display]="mostrarColumna('Bloque Inicio')">{{ asistencia!.bloqueInicio }}</td>
         </tr>
-        <tr>
-          <td>Bloque Término</td>
-          <td>{{ asistencia!.bloqueTermino }}</td>
+        <tr [style.display]="filaVisible(1)">
+          <td [style.display]="mostrarColumna('Bloque Término')">Bloque Término:</td>
+          <td [style.display]="mostrarColumna('Bloque Término')">{{ asistencia!.bloqueTermino }}</td>
         </tr>
-        <tr>
-          <td>Día</td>
-          <td>{{ asistencia!.dia }}</td>
+        <tr [style.display]="filaVisible(2)">
+          <td [style.display]="mostrarColumna('Día')">Día:</td>
+          <td [style.display]="mostrarColumna('Día')">{{ asistencia!.dia }}</td>
         </tr>
-        <tr>
-          <td>Hora Inicio</td>
-          <td>{{ asistencia!.horaInicio }}</td>
+        <tr [style.display]="filaVisible(3)">
+          <td [style.display]="mostrarColumna('Hora Inicio')">Hora Inicio:</td>
+          <td [style.display]="mostrarColumna('Hora Inicio')">{{ asistencia!.horaInicio }}</td>
         </tr>
-        <tr>
-          <td>Hora Fin</td>
-          <td>{{ asistencia!.horaFin }}</td>
+        <tr [style.display]="filaVisible(4)">
+          <td [style.display]="mostrarColumna('Hora Fin')">Hora Fin:</td>
+          <td [style.display]="mostrarColumna('Hora Fin')">{{ asistencia!.horaFin }}</td>
         </tr>
-        <tr>
-          <td>ID Asignatura</td>
-          <td>{{ asistencia!.idAsignatura }}</td>
+        <tr [style.display]="filaVisible(5)">
+          <td [style.display]="mostrarColumna('ID Asignatura')">ID Asignatura:</td>
+          <td [style.display]="mostrarColumna('ID Asignatura')">{{ asistencia!.idAsignatura }}</td>
         </tr>
-        <tr>
-          <td>Nombre Asignatura</td>
-          <td>{{ asistencia!.nombreAsignatura }}</td>
+        <tr [style.display]="filaVisible(6)">
+          <td [style.display]="mostrarColumna('Nombre Asignatura')">Nombre Asignatura:</td>
+          <td [style.display]="mostrarColumna('Nombre Asignatura')">{{ asistencia!.nombreAsignatura }}</td>
         </tr>
-        <tr>
-          <td>Nombre Profesor</td>
-          <td>{{ asistencia!.nombreProfesor }}</td>
+        <tr [style.display]="filaVisible(7)">
+          <td [style.display]="mostrarColumna('Nombre Profesor')">Nombre Profesor:</td>
+          <td [style.display]="mostrarColumna('Nombre Profesor')">{{ asistencia!.nombreProfesor }}</td>
         </tr>
-        <tr>
-          <td>Sección</td>
-          <td>{{ asistencia!.seccion }}</td>
+        <tr [style.display]="filaVisible(8)">
+          <td [style.display]="mostrarColumna('Sección')">Sección:</td>
+          <td [style.display]="mostrarColumna('Sección')">{{ asistencia!.seccion }}</td>
         </tr>
-        <tr>
-          <td>Sede</td>
-          <td>{{ asistencia!.sede }}</td>
+        <tr [style.display]="filaVisible(9)">
+          <td [style.display]="mostrarColumna('Sede')">Sede:</td>
+          <td [style.display]="mostrarColumna('Sede')">{{ asistencia!.sede }}</td>
         </tr>
       </tbody>
     </table>
   </div>
+  
 </ion-content>
 
 <ion-footer>
