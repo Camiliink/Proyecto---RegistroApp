@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-title #titulo size="large">
+      Sistema de Asistencia DUOC
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-title class="titulo">¡¡ Lo sentimos {{nombre}} {{apellido}} !!</ion-title>
+      <br>
+      <h2 class="titulo">Porfavor Vuelve a intentarlo</h2>
+    </ion-card-header>
+    <ion-card-content class="centro-texto">
+      <img src="../../../assets/img/incorrecto.avif" alt="">
+      <a #contenido class="boton" (click)="pregunta()">Volver a Intentar</a>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="logo-container">
+    <img alt="Logo DUOC" src="../../../assets/img/Logo_Duoc.png" class="logo" style="height: 120px;"/>
+  </div>
+
+  <div class="footer" style="text-align: center; margin-top: 20px;">
+    <p>© 2024 Sistema de Asistencia DUOC. Todos los derechos reservados.</p>
+  </div>
+</ion-content>

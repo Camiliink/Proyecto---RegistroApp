@@ -1,6 +1,7 @@
+import { Usuario } from './../../model/usuario';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from 'src/app/model/usuario';
+
 
 @Component({
   selector: 'app-pregunta',
@@ -34,10 +35,28 @@ export class PreguntaPage implements OnInit {
   }
 
   verificarRespuesta() {
+    const usuario: Usuario | undefined = Usuario.buscarUsuarioPorCorreo(this.correo);
+  
     if (this.respuesta.trim().toLowerCase() === this.respuestaCorrecta.trim().toLowerCase()) {
-      alert('Respuesta correcta. Tu contraseña es: ' + Usuario.buscarUsuarioPorCorreo(this.correo)!.password);
+      if (usuario) {
+        this.router.navigate(['/correcto'], {   
+          state: { 
+            password: usuario.password,
+            nombre: usuario.nombre,
+            apellido: usuario.apellido
+          }
+        });
+      }
     } else {
-      alert('Respuesta incorrecta. Inténtalo de nuevo.');
+      if (usuario) {
+        this.router.navigate(['/incorrecto'], {
+          state: {
+            nombre: usuario.nombre,
+            apellido: usuario.apellido
+          }
+        });
+      }
     }
   }
+  
 }
