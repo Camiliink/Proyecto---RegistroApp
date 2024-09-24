@@ -63,3 +63,15 @@
 	--ion-color-dark-tint: #444444;
 
 }
+.pregunta-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Hace que ocupe toda la altura de la pantalla */
+  padding: 20px;
+}
+
+ion-card {
+  width: 100%;
+  max-width: 400px; /* Define un ancho máximo para que no sea demasiado grande en pantallas grandes */
+}
