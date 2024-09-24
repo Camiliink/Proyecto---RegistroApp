@@ -73,21 +73,21 @@ export class QrreaderPage implements OnInit {
   public mostrarDatosQROrdenados(datosQR: string): void {
     this.datosQR = datosQR;
     this.asistencia = JSON.parse(datosQR);
-    this.palabras = ['Has', 'quedado', 'presente', 'en', 'tu', 'clase'];
+    this.palabras = ['Has', 'quedado', 'presente', 'en', 'tu', 'clase!!'];
     this.indexPalabra = 0;
-    this.filasVisibles = Array(this.palabras.length).fill(false); // Inicializa todas las filas como no visibles
+    this.filasVisibles = Array(this.palabras.length).fill(false); 
     this.mostrarPalabraPorTiempo();
   }
 
   public mostrarPalabraPorTiempo(): void {
     if (this.indexPalabra < this.palabras.length) {
       setTimeout(() => {
-        // Muestra dos filas por cada palabra
-        this.filasVisibles[this.indexPalabra * 2] = true;   // Primera fila
-        this.filasVisibles[this.indexPalabra * 2 + 1] = true; // Segunda fila
+        
+        this.filasVisibles[this.indexPalabra * 2] = true;   
+        this.filasVisibles[this.indexPalabra * 2 + 1] = true; 
         this.indexPalabra++;
         this.mostrarPalabraPorTiempo();
-      }, 500); // Cambia el tiempo de espera según tus necesidades
+      }, 333); 
     }
   }
 
@@ -96,11 +96,11 @@ export class QrreaderPage implements OnInit {
   }
 
   public mostrarColumna(columna: string): string {
-    return 'table-cell'; // O 'none' según la lógica
+    return 'table-cell'; 
   }
 
   public filaVisible(index: number): string {
-    return this.filasVisibles[index] ? 'table-row' : 'none'; // Controla la visibilidad de las filas
+    return this.filasVisibles[index] ? 'table-row' : 'none'; 
   }
 
   public detenerEscaneoQR(): void {
