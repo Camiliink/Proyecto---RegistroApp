@@ -4,6 +4,7 @@ import { Usuario } from 'src/app/model/usuario';
 import jsQR, { QRCode } from 'jsqr';
 import { Asistencia } from 'src/app/interfaces/asistencia';
 
+
 @Component({
   selector: 'app-qrreader',
   templateUrl: './qrreader.page.html',
@@ -13,6 +14,7 @@ export class QrreaderPage implements OnInit {
 
   @ViewChild('video') private video!: ElementRef;
   @ViewChild('canvas') private canvas!: ElementRef;
+  @ViewChild('titulo', { read: ElementRef }) itemTitulo!: ElementRef;
 
   public usuario: Usuario;
   public asistencia: Asistencia | undefined = undefined;
@@ -20,16 +22,19 @@ export class QrreaderPage implements OnInit {
   public datosQR: string = '';
   public palabras: string[] = [];
   private indexPalabra: number = 0;
-  public filasVisibles: boolean[] = []; // Para controlar la visibilidad de las filas
+  public filasVisibles: boolean[] = []; 
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router) {
     this.usuario = new Usuario();
     this.usuario.recibirUsuario(activatedRoute, router);
+    
   }
 
   ngOnInit() {
     this.comenzarEscaneoQR();
   }
+
+
 
   public async comenzarEscaneoQR() {
     const mediaProvider: MediaProvider = await navigator.mediaDevices.getUserMedia({

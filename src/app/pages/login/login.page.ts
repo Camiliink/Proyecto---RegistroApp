@@ -19,7 +19,7 @@ export class LoginPage {
   {
     this.usuario = new Usuario();
     this.usuario.recibirUsuario(activatedRoute, router);
-    this.usuario.cuenta = 'atorres';
+    this.usuario.cuenta = 'agarcia';
     this.usuario.password = '1234';
   }
   public ingresarValidarCorreo(): void {

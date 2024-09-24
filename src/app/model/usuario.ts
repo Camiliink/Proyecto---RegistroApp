@@ -103,13 +103,13 @@ export class Usuario extends Persona {
   public static getListaUsuarios(): Usuario[] {
     return [
       Usuario.getNewUsuario(
-        'atorres', 
-        'atorres@duocuc.cl', 
+        'agarcia', 
+        'agarcia@duocuc.cl', 
         '1234', 
         '¿Cuál es tu animal favorito?', 
         'gato', 
-        'Ana', 
-        'Torres', 
+        'Alison', 
+        'Garcia', 
         NivelEducacional.buscarNivelEducacional(6)!,
         new Date(2000, 0, 1)
       ),
