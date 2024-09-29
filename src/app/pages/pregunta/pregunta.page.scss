@@ -1,0 +1,43 @@
+.titulo {
+  font-weight: bold; 
+  font-size: 25px; 
+  text-align: center; 
+  color: #FFFFFF;
+  margin-bottom: px;
+}
+
+ion-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distribuir el contenido entre la parte superior e inferior */
+  height: 100vh; /* Usar toda la altura de la pantalla */
+}
+
+.spacer {
+  height: 100px; /* Reducimos el espaciado */
+}
+
+.boton-secundario {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.logo-container {
+  display: flex;          
+  justify-content: center; 
+  align-items: center;     
+  padding-bottom: 20px; /* Espacio adicional para que el logo no toque el borde */
+}
+
+.logo {
+  max-width: 100%; 
+  height: auto;   
+}
+
+
+.footer {
+  background-color: #1A1A1A;
+  color: #FFFFFF; 
+  padding: 20px; 
+  text-align: center;
+}

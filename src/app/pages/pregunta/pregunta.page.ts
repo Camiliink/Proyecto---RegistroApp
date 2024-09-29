@@ -16,6 +16,7 @@ export class PreguntaPage implements OnInit,AfterViewInit {
   respuestaCorrecta: string = '';
 
   @ViewChild('pageContent', { read: ElementRef }) pageContent!: ElementRef;
+  @ViewChild('titulo', { read: ElementRef }) itemTitulo!: ElementRef;
 
   constructor(private router: Router, private animationController: AnimationController) {}
 
@@ -35,10 +36,23 @@ export class PreguntaPage implements OnInit,AfterViewInit {
       this.router.navigate(['/login']);
     }
   }
-  ngAfterViewInit() {
-    this.animarEntradaPagina();
+  ngAfterViewInit(): void {
+    if (this.itemTitulo) {
+      const animation = this.animationController
+        .create()
+        .addElement(this.itemTitulo.nativeElement)
+        .iterations(Infinity)
+        .duration(7000)
+        .fromTo('transform', 'translate(0%)', 'translate(100%)')
+        .fromTo('opacity', 0.5, 1);
+      animation.play();
+    }
+    this.animarEntradaPagina();  // Llamamos la animación de entrada una vez
   }
-
+  irAlLogin() {
+    this.correo = ''; 
+    this.router.navigate(['/login'], { replaceUrl: true });
+  }
   animarEntradaPagina() {
     this.animationController
       .create()

@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
-import { AnimationController } from '@ionic/angular';
+import { AnimationController, AlertController } from '@ionic/angular';
 import { Usuario } from 'src/app/model/usuario';
 
 @Component({
@@ -12,25 +12,44 @@ export class CorreoPage implements OnInit,AfterViewInit {
 
   public correo: string = '';
   @ViewChild('pageContent', { read: ElementRef }) pageContent!: ElementRef;
+  @ViewChild('titulo', { read: ElementRef }) itemTitulo!: ElementRef;
 
-  constructor(private router: Router, private animationController: AnimationController) { }
+  constructor(
+    private router: Router, 
+    private animationController: AnimationController,
+    private alertController: AlertController) { }
 
   ngOnInit() {
   }
-  ngAfterViewInit() {
-    this.animarEntradaPagina();
+  ngAfterViewInit(): void {
+    if (this.itemTitulo) {
+      const animation = this.animationController
+        .create()
+        .addElement(this.itemTitulo.nativeElement)
+        .iterations(Infinity)
+        .duration(7000)
+        .fromTo('transform', 'translate(0%)', 'translate(100%)')
+        .fromTo('opacity', 0.5, 1);
+      animation.play();
+    }
+    this.animarEntradaPagina();  
   }
   animarEntradaPagina() {
     this.animationController
       .create()
       .addElement(this.pageContent.nativeElement)
       .duration(1500)
-      .fromTo('opacity', '0', '1')  // Fade in effect
-      .fromTo('transform', 'translateY(100%)', 'translateY(0%)')  // Slide from bottom to top
+      .fromTo('opacity', '0', '1') 
+      .fromTo('transform', 'translateY(100%)', 'translateY(0%)')  
       .easing('ease-out')
       .play();
   }
-  ingresarPaginaValidarRespuestaSecreta() {
+  irAlLogin() {
+    this.correo = ''; 
+    this.router.navigate(['/login'], { replaceUrl: true });
+  }
+  
+  async ingresarPaginaValidarRespuestaSecreta() {
     const usuario = Usuario.buscarUsuarioPorCorreo(this.correo);
     if (usuario) {
       const navigationExtras: NavigationExtras = {
@@ -39,9 +58,14 @@ export class CorreoPage implements OnInit,AfterViewInit {
           preguntaSecreta: usuario.preguntaSecreta
         }
       };
-      this.router.navigate(['/pregunta'], navigationExtras);  // Navegar a la página de pregunta
+      this.router.navigate(['/pregunta'], navigationExtras);  
     } else {
-      alert('Correo no encontrado.');
+      const alert = await this.alertController.create({
+        header: 'Error',
+        message: 'ingrese un correo valido.',
+        buttons: ['OK']
+      });
+      await alert.present();
     }
   }
 }

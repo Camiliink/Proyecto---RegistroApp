@@ -1,17 +1,21 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Pregunta de Seguridad</ion-title>
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-title #titulo size="large">
+      Sistema de Asistencia DUOC
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content #pageContent class="ion-padding">
+  
   <div class="pregunta-container">
     <ion-card>
       <ion-card-subtitle>Pregunta de seguridad para {{ correo }}</ion-card-subtitle>
-      
+      <ion-card-header>
+        <ion-card-title>Paso II: Responde la pregunta secreta</ion-card-title>
+      </ion-card-header>
       
       <ion-item>
-        <ion-label position="floating">Paso II: Responde la pregunta secreta</ion-label>
         <ion-input type="text" [value]="pregunta" disabled></ion-input>
       </ion-item>
 
@@ -25,4 +29,17 @@
       <ion-button expand="full" (click)="verificarRespuesta()">Recuperar contraseña</ion-button>
     </ion-card>
   </div>
+  <div class="spacer"></div>
+  <ion-button expand="block" color="secondary" (click)="irAlLogin()" class="boton-secundario">
+    Iniciar Sesión
+  </ion-button>
 </ion-content>
+<ion-footer><div class="logo-container">
+  <img alt="Logo DUOC" src="../../../assets/img/Logo_Duoc.png" class="logo" style="height: 120px;">
+</div>
+
+<div class="footer">
+  <p>© 2024 Sistema de Asistencia DUOC. Todos los derechos reservados.</p>
+</div>
+</ion-footer>
+  

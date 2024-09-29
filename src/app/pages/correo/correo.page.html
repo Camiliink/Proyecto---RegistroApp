@@ -1,13 +1,38 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Correo</ion-title>
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-title #titulo size="large">
+      Sistema de Asistencia DUOC
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content #pageContent>
+<ion-content center-container #pageContent>
   <ion-card>
-    <ion-card-subtitle>Paso I: Ingresa tu correo</ion-card-subtitle>
-    <ion-input type="text" placeholder="Ingresa tu correo" [(ngModel)]="correo"></ion-input> 
-    <ion-button (click)="ingresarPaginaValidarRespuestaSecreta()">Recuperar contraseña</ion-button>
+    <ion-card-header>
+      <ion-card-title>Paso I: Ingresa tu correo</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Correo</ion-label>
+        <ion-input type="text" placeholder="Ingresa tu correo" [(ngModel)]="correo"></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" (click)="ingresarPaginaValidarRespuestaSecreta()">Recuperar contraseña</ion-button>
+    </ion-card-content>
   </ion-card>
+  <div class="spacer"></div>
+  <ion-button expand="block" color="secondary" (click)="irAlLogin()" class="boton-secundario">
+    Iniciar Sesión
+  </ion-button>
+  
 </ion-content>
+<ion-footer>
+  <div class="logo-container">
+    <img alt="Logo DUOC" src="../../../assets/img/Logo_Duoc.png" class="logo" style="height: 120px;">
+  </div>
+
+  <div class="footer">
+    <p>© 2024 Sistema de Asistencia DUOC. Todos los derechos reservados.</p>
+  </div>
+</ion-footer>
