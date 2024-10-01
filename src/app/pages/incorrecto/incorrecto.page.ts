@@ -12,7 +12,7 @@ export class IncorrectoPage implements OnInit, AfterViewInit {
   @ViewChild('titulo', { read: ElementRef }) itemTitulo!: ElementRef;
   @ViewChild('contenido', { read: ElementRef }) itemContenido!: ElementRef;
   @ViewChild('page', { read: ElementRef }) itemPage!: ElementRef;
-
+  public correo: string = '';
   public nombre: string = '';
   public apellido: string = '';
 
@@ -22,6 +22,10 @@ export class IncorrectoPage implements OnInit, AfterViewInit {
     this.animarSalidaPagina(() => {
       this.router.navigate(['/pregunta']);
     });
+  }
+  irAlLogin() {
+    this.correo = '';
+    this.router.navigate(['/login'], { replaceUrl: true });
   }
 
   ngOnInit() {

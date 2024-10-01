@@ -52,20 +52,33 @@ export class CorreoPage implements OnInit,AfterViewInit {
   async ingresarPaginaValidarRespuestaSecreta() {
     const usuario = Usuario.buscarUsuarioPorCorreo(this.correo);
     if (usuario) {
-      const navigationExtras: NavigationExtras = {
+      const navigationExtras = {
         state: {
           correo: this.correo,
           preguntaSecreta: usuario.preguntaSecreta
         }
       };
-      this.router.navigate(['/pregunta'], navigationExtras);  
+      this.router.navigate(['/pregunta'], navigationExtras);  // Navegar a la página de pregunta
     } else {
-      const alert = await this.alertController.create({
-        header: 'Error',
-        message: 'ingrese un correo valido.',
-        buttons: ['OK']
-      });
-      await alert.present();
+      // Mostrar alert antes de redirigir
+      await this.mostrarAlerta('Error', 'El correo ingresado no es válido');
+      // Redirigir a la página "incorrecto"
+      const navigationExtras = {
+        state: {
+          mensajeError: 'El correo ingresado no es válido.'
+        }
+      };
+      this.router.navigate(['/incorrecto'], navigationExtras);
     }
+  }
+
+  // Método para mostrar el Alert
+  async mostrarAlerta(titulo: string, mensaje: string) {
+    const alert = await this.alertController.create({
+      header: titulo,
+      message: mensaje,
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 }
