@@ -83,27 +83,19 @@ export class InicioPage implements AfterViewInit {
     const h: number = this.video.nativeElement.videoHeight;
     this.canvas.nativeElement.width = w;
     this.canvas.nativeElement.height = h;
-
     const context: CanvasRenderingContext2D = this.canvas.nativeElement.getContext('2d', { willReadFrequently: true });
-    
-    if (context) {
-      context.drawImage(this.video.nativeElement, 0, 0, w, h);
-      const img: ImageData = context.getImageData(0, 0, w, h);
-      const qrCode: QRCode | null = jsQR(img.data, w, h, { inversionAttempts: 'dontInvert' });
-      
-      if (qrCode && qrCode.data !== '') {
-        this.escaneando = false; // Detenemos el escaneo
-        this.datosQR = qrCode.data; // Guardamos los datos del QR
-        this.mostrarMensajeAlerta(`QR escaneado: ${this.datosQR}`); // Mostramos alerta con los datos
-        
-        // Navegamos a MiclasesPage y pasamos datosQR como parámetro
-        this.router.navigate(['/miclases'], { state: { datosQR: this.datosQR } });
-
-        return true; // QR escaneado con éxito
+    context.drawImage(this.video.nativeElement, 0, 0, w, h);
+    const img: ImageData = context.getImageData(0, 0, w, h);
+    let qrCode: QRCode | null = jsQR(img.data, w, h, { inversionAttempts: 'dontInvert' });
+    if (qrCode) {
+      if (qrCode.data !== '') {
+        this.escaneando = false;
+        this.datosQR = qrCode.data; // Guardar datos del QR
+        this.mostrarMensajeAlerta(`QR escaneado: ${this.datosQR}`); // Mostrar alerta con los datos
+        return true;
       }
     }
-    
-    return false; // No se pudo escanear un QR
+    return false;
   }
 
   public detenerEscaneoQR(): void {

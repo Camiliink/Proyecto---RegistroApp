@@ -34,11 +34,7 @@ const routes: Routes = [
   {
     path: 'incorrecto',
     loadChildren: () => import('./pages/incorrecto/incorrecto.module').then( m => m.IncorrectoPageModule)
-  },  {
-    path: 'miclases',
-    loadChildren: () => import('./pages/miclases/miclases.module').then( m => m.MiclasesPageModule)
   },
-
 
 ];
 
