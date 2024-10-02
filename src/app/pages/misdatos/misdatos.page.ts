@@ -1,4 +1,3 @@
-
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
@@ -6,8 +5,6 @@ import { NivelEducacional } from 'src/app/model/nivel-educacional';
 import { Usuario } from 'src/app/model/usuario';
 import { AnimationController} from '@ionic/angular';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Asistencia } from 'src/app/interfaces/asistencia';
-import jsQR, { QRCode } from 'jsqr';
 
 @Component({
   selector: 'app-misdatos',
@@ -24,20 +21,11 @@ export class MisdatosPage implements AfterViewInit {
   @ViewChild('itemApellido', { read: ElementRef }) itemApellido!: ElementRef;
   @ViewChild('itemEducacion', { read: ElementRef }) itemEducacion!: ElementRef;
   @ViewChild('itemFechaNacimiento', { read: ElementRef }) itemFechaNacimiento!: ElementRef;
-  @ViewChild('video') private video!: ElementRef;
-  @ViewChild('canvas') private canvas!: ElementRef;
   
   public listaNivelesEducacionales = NivelEducacional.getNivelesEducacionales();
   
   public usuario: Usuario;
   MensajeDatos: any;
-  
-  public asistencia: Asistencia | undefined = undefined;
-  public escaneando = false;
-  public datosQR: string = '';
-  public palabras: string[] = [];
-  private indexPalabra: number = 0;
-  public filasVisibles: boolean[] = []; 
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -47,7 +35,6 @@ export class MisdatosPage implements AfterViewInit {
   {
     this.usuario = new Usuario();
     this.usuario.recibirUsuario(this.activatedRoute, this.router);
-    
   }
 
   ngAfterViewInit() {
@@ -147,90 +134,7 @@ export class MisdatosPage implements AfterViewInit {
   }
 
   
-
-  ngOnInit() {
-    this.comenzarEscaneoQR();
+  actualizarUsuario() {
+    this.usuario.actualizarUsuario();
   }
-
-
-
-  public async comenzarEscaneoQR() {
-    const mediaProvider: MediaProvider = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: 'environment' }
-    });
-    this.video.nativeElement.srcObject = mediaProvider;
-    this.video.nativeElement.setAttribute('playsinline', 'true');
-    this.video.nativeElement.play();
-    this.escaneando = true;
-    requestAnimationFrame(this.verificarVideo.bind(this));
-  }
-
-  async verificarVideo() {
-    if (this.video.nativeElement.readyState === this.video.nativeElement.HAVE_ENOUGH_DATA) {
-      if (this.obtenerDatosQR() || !this.escaneando) return;
-      requestAnimationFrame(this.verificarVideo.bind(this));
-    } else {
-      requestAnimationFrame(this.verificarVideo.bind(this));
-    }
-  }
-
-  public obtenerDatosQR(): boolean {
-    const w: number = this.video.nativeElement.videoWidth;
-    const h: number = this.video.nativeElement.videoHeight;
-    this.canvas.nativeElement.width = w;
-    this.canvas.nativeElement.height = h;
-    const context: CanvasRenderingContext2D = this.canvas.nativeElement.getContext('2d', { willReadFrequently: true });
-    context.drawImage(this.video.nativeElement, 0, 0, w, h);
-    const img: ImageData = context.getImageData(0, 0, w, h);
-    let qrCode: QRCode | null = jsQR(img.data, w, h, { inversionAttempts: 'dontInvert' });
-    if (qrCode) {
-      if (qrCode.data !== '') {
-        this.escaneando = false;
-        this.mostrarDatosQROrdenados(qrCode.data);
-        return true;
-      }
-    }
-    return false;
-  }
-
-  public mostrarDatosQROrdenados(datosQR: string): void {
-    this.datosQR = datosQR;
-    this.asistencia = JSON.parse(datosQR);
-    this.palabras = ['Has', 'quedado', 'presente', 'en', 'tu', 'clase!!'];
-    this.indexPalabra = 0;
-    this.filasVisibles = Array(this.palabras.length).fill(false); 
-    this.mostrarPalabraPorTiempo();
-  }
-
-  public mostrarPalabraPorTiempo(): void {
-    if (this.indexPalabra < this.palabras.length) {
-      setTimeout(() => {
-        
-        this.filasVisibles[this.indexPalabra * 2] = true;   
-        this.filasVisibles[this.indexPalabra * 2 + 1] = true; 
-        this.indexPalabra++;
-        this.mostrarPalabraPorTiempo();
-      }, 333); 
-    }
-  }
-
-  public mostrarPalabra(word: string): string {
-    return this.indexPalabra > this.palabras.indexOf(word) ? 'inline' : 'none';
-  }
-
-  public mostrarColumna(columna: string): string {
-    return 'table-cell'; 
-  }
-
-  public filaVisible(index: number): string {
-    return this.filasVisibles[index] ? 'table-row' : 'none'; 
-  }
-
-  public detenerEscaneoQR(): void {
-    this.escaneando = false;
-  }
-
-  
-
 }
-

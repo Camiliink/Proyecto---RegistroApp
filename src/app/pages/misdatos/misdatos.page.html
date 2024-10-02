@@ -17,15 +17,10 @@
     <ion-button shape="round" size="small" color="warning"
         (click)="navegar('/misdatos')">
         <ion-icon name="accessibility-outline"></ion-icon>
-       Mis Datos
+      Mis Datos
     </ion-button>
     
-
-    <ion-button shape="round" size="small" color="warning"
-        (click)="navegar('/login')">
-      <ion-icon slot="start" name="log-out"></ion-icon>
-      Salir
-    </ion-button>
+    
   </ion-toolbar>
 
 
@@ -65,10 +60,28 @@
             placeholder="Ej: Torres"></ion-input>
       </ion-item>
 
+      <ion-item #itemCorreo>
+        <ion-input [(ngModel)]="usuario.correo"
+            label="Correo" labelPlacement="floating"
+            placeholder="Ej: atorres@duocuc.cl"></ion-input>
+      </ion-item>
+
+      <ion-item #itemPregunta>
+        <ion-input [(ngModel)]="usuario.preguntaSecreta"
+            label="Pregunta Secreta" labelPlacement="floating"
+            placeholder="Ej: Torres"></ion-input>
+      </ion-item>
+
+      <ion-item #itemRespuesta>
+        <ion-input [(ngModel)]="usuario.respuestaSecreta"
+            label="Respuesta Secreta" labelPlacement="floating"
+            placeholder="Ej: Torres"></ion-input>
+      </ion-item>
+
       <ion-item #itemEducacion class="font-size-12">
         <ion-select [(ngModel)]="usuario.nivelEducacional!.id"
             (ionChange)="actualizarNivelEducacional($event)"
-            label="Educación" position="floating">
+            label="Nivel Educacional" position="floating">
           <ion-select-option *ngFor="let nivelEducacional of listaNivelesEducacionales" 
             [value]="nivelEducacional.id">
               {{nivelEducacional.nombre}}
@@ -98,17 +111,25 @@
         </table>
       </ion-item>
 
-      <ion-button shape="round" size="small" color="warning"
-          (click)="limpiarAnimandoDerIzq()">
-        Limpiar 
-      </ion-button>
+      <ion-item #itemContraseña>
+        <ion-input [(ngModel)]="usuario.password"
+            label="Contraseña" labelPlacement="floating"
+            placeholder="Ej: 1234 "></ion-input>
+      </ion-item>
 
       <ion-button shape="round" size="small" color="warning"
-          (click)="mostrarDatosPersona()">
-        Ver datos
+          (click)="actualizarUsuario()">
+        Actualizar
       </ion-button>
+
+      <br>
+
+      <ion-button shape="round" size="small" color="warning"
+        (click)="navegar('/login')">
+      <ion-icon slot="start" name="log-out"></ion-icon>
+      Cerrar Sesion
+    </ion-button>
 
     </div>
   </div>
 </ion-content>
-
