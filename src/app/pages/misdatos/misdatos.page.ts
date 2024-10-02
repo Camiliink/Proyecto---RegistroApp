@@ -5,7 +5,7 @@ import { NivelEducacional } from 'src/app/model/nivel-educacional';
 import { Usuario } from 'src/app/model/usuario';
 import { AnimationController} from '@ionic/angular';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-
+import { ToastController } from '@ionic/angular';
 @Component({
   selector: 'app-misdatos',
   templateUrl: './misdatos.page.html',
@@ -31,7 +31,8 @@ export class MisdatosPage implements AfterViewInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private alertController: AlertController,
-    private animationController: AnimationController) 
+    private animationController: AnimationController,
+    private toastController: ToastController) 
   {
     this.usuario = new Usuario();
     this.usuario.recibirUsuario(this.activatedRoute, this.router);
@@ -136,5 +137,16 @@ export class MisdatosPage implements AfterViewInit {
   
   actualizarUsuario() {
     this.usuario.actualizarUsuario();
+    this.mostrarMensajeEmergente('¡Usuario Actualizado correctamente!');
+  }
+
+
+
+  async mostrarMensajeEmergente(mensaje: string, duracion?: number) {
+    const toast = await this.toastController.create({
+        message: mensaje,
+        duration: duracion? duracion: 2000
+      });
+    toast.present();
   }
 }

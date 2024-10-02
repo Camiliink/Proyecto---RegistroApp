@@ -213,6 +213,7 @@ export class Usuario extends Persona {
       usu.nivelEducacional = this.nivelEducacional;
       usu.fechaNacimiento = this.fechaNacimiento;
       usu.asistencia = this.asistencia;
+      
     }
   }
 }
