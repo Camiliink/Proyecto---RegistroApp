@@ -8,24 +8,7 @@
 
 <ion-content [fullscreen]="true" class="ion-padding-horizontal ion-text-center">
 
-  <ion-toolbar class="ion-text-center">
-    
-    <ion-button shape="round" size="small" color="warning"
-        (click)="navegar('/inicio')">
-      <ion-icon slot="start" name="home"></ion-icon>
-      Inicio
-    </ion-button>
-    <ion-button shape="round" size="small" color="warning"
-        (click)="navegar('/misdatos')">
-        <ion-icon name="accessibility-outline"></ion-icon>
-        Mis Datos
-    </ion-button>
-    <ion-button shape="round" size="small" color="warning"
-        (click)="navegar('/login')">
-      <ion-icon slot="start" name="log-out"></ion-icon>
-      Salir
-    </ion-button>
-  </ion-toolbar>
+  
 
 
   <div class="contenedor-video-canvas">
@@ -33,10 +16,7 @@
     <canvas #canvas hidden></canvas>
 
     <div class="margin-top">
-      <ion-button *ngIf="!escaneando" (click)="comenzarEscaneoQR()" shape="round" color="warning">
-        <ion-icon slot="start" name="videocam-outline"></ion-icon>
-        Comenzar Escaneo de QR
-      </ion-button>
+      
 
       <ion-button *ngIf="escaneando" (click)="detenerEscaneoQR()" shape="round">
         <ion-icon slot="start" name="stop-circle-outline"></ion-icon>
@@ -97,7 +77,24 @@
       </tbody>
     </table>
   </div>
-  
+  <ion-toolbar class="ion-text-center">
+    
+    <ion-button shape="round" size="small" color="warning"
+        (click)="navegar('/inicio')">
+      <ion-icon slot="start" name="home"></ion-icon>
+      Inicio
+    </ion-button>
+    <ion-button shape="round" size="small" color="warning"
+        (click)="navegar('/misdatos')">
+        <ion-icon name="accessibility-outline"></ion-icon>
+        Mis Datos
+    </ion-button>
+    <ion-button shape="round" size="small" color="warning"
+        (click)="navegar('/login')">
+      <ion-icon slot="start" name="log-out"></ion-icon>
+      Salir
+    </ion-button>
+  </ion-toolbar>
 </ion-content>
 
 <ion-footer>

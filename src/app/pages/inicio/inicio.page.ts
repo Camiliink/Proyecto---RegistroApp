@@ -6,6 +6,8 @@ import { NivelEducacional } from 'src/app/model/nivel-educacional';
 import { Usuario } from 'src/app/model/usuario';
 import { AnimationController} from '@ionic/angular';
 import { animate, animation, state, style, transition, trigger } from '@angular/animations';
+import jsQR, { QRCode } from 'jsqr';
+import { Asistencia } from 'src/app/interfaces/asistencia';
 
 @Component({
   selector: 'app-inicio',
@@ -18,11 +20,17 @@ export class InicioPage implements AfterViewInit {
   @ViewChild('titulo', { read: ElementRef }) itemTitulo!: ElementRef;
   @ViewChild('page', { read: ElementRef }) page!: ElementRef;
   @ViewChild('mensajeQR', {read: ElementRef})itemMensajeQR! : ElementRef;
-  
+  @ViewChild('video') private video!: ElementRef;
+  @ViewChild('canvas') private canvas!: ElementRef;
   
   public usuario: Usuario;
   cardElements: any;
-  
+  public asistencia: Asistencia | undefined = undefined;
+  public escaneando = false;
+  public datosQR: string = '';
+  public palabras: string[] = [];
+  private indexPalabra: number = 0;
+  public filasVisibles: boolean[] = []; 
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -114,6 +122,81 @@ export class InicioPage implements AfterViewInit {
       { offset: 1, transform: 'scale(1)', opacity: '1' },
     ])
     .play()
+  }
+  public async comenzarEscaneoQR() {
+    const mediaProvider: MediaProvider = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: 'environment' }
+    });
+    this.video.nativeElement.srcObject = mediaProvider;
+    this.video.nativeElement.setAttribute('playsinline', 'true');
+    this.video.nativeElement.play();
+    this.escaneando = true;
+    requestAnimationFrame(this.verificarVideo.bind(this));
+  }
+
+  async verificarVideo() {
+    if (this.video.nativeElement.readyState === this.video.nativeElement.HAVE_ENOUGH_DATA) {
+      if (this.obtenerDatosQR() || !this.escaneando) return;
+      requestAnimationFrame(this.verificarVideo.bind(this));
+    } else {
+      requestAnimationFrame(this.verificarVideo.bind(this));
+    }
+  }
+
+  public obtenerDatosQR(): boolean {
+    const w: number = this.video.nativeElement.videoWidth;
+    const h: number = this.video.nativeElement.videoHeight;
+    this.canvas.nativeElement.width = w;
+    this.canvas.nativeElement.height = h;
+    const context: CanvasRenderingContext2D = this.canvas.nativeElement.getContext('2d', { willReadFrequently: true });
+    context.drawImage(this.video.nativeElement, 0, 0, w, h);
+    const img: ImageData = context.getImageData(0, 0, w, h);
+    let qrCode: QRCode | null = jsQR(img.data, w, h, { inversionAttempts: 'dontInvert' });
+    if (qrCode) {
+      if (qrCode.data !== '') {
+        this.escaneando = false;
+        this.mostrarDatosQROrdenados(qrCode.data);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public mostrarDatosQROrdenados(datosQR: string): void {
+    this.datosQR = datosQR;
+    this.asistencia = JSON.parse(datosQR);
+    this.palabras = ['Has', 'quedado', 'presente', 'en', 'tu', 'clase!!'];
+    this.indexPalabra = 0;
+    this.filasVisibles = Array(this.palabras.length).fill(false); 
+    this.mostrarPalabraPorTiempo();
+  }
+
+  public mostrarPalabraPorTiempo(): void {
+    if (this.indexPalabra < this.palabras.length) {
+      setTimeout(() => {
+        
+        this.filasVisibles[this.indexPalabra * 2] = true;   
+        this.filasVisibles[this.indexPalabra * 2 + 1] = true; 
+        this.indexPalabra++;
+        this.mostrarPalabraPorTiempo();
+      }, 333); 
+    }
+  }
+
+  public mostrarPalabra(word: string): string {
+    return this.indexPalabra > this.palabras.indexOf(word) ? 'inline' : 'none';
+  }
+
+  public mostrarColumna(columna: string): string {
+    return 'table-cell'; 
+  }
+
+  public filaVisible(index: number): string {
+    return this.filasVisibles[index] ? 'table-row' : 'none'; 
+  }
+
+  public detenerEscaneoQR(): void {
+    this.escaneando = false;
   }
 
 

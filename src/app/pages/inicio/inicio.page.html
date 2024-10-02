@@ -7,25 +7,12 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
-  <ion-toolbar class="ion-text-center">
-    
-    <ion-button shape="round" size="small" color="warning"
-        (click)="navegar('/inicio')">
-      <ion-icon slot="start" name="home"></ion-icon>
-      Inicio
-    </ion-button>
-    <ion-button shape="round" size="small" color="warning"
-        (click)="navegar('/misdatos')">
-        <ion-icon name="accessibility-outline"></ion-icon>
-      Mis Datos
-    </ion-button>
-    <ion-button shape="round" size="small" color="warning"
-        (click)="navegar('/login')">
-      <ion-icon slot="start" name="log-out"></ion-icon>
-      Salir
-    </ion-button>
-  </ion-toolbar>
+  <ion-card>
+  <div class="enmarcar ion-text-center">
+    <img alt="DUOC" src="../../../assets/img/Logo_Duoc.png" style="height: 120px;"/> 
+  </div>
+  </ion-card>
+  
 
 
   <div class="centrar">
@@ -43,22 +30,34 @@
     <h1 class="ion-text-center" style="margin: 2rem 0;"> Registra tu asistencia a clases </h1>
 
     <ion-row class="ion-justify-content-center">
-      <ion-button #mensajeQR shape="round" size="large" color="warning" style="margin: 3rem 0;"
-              (click)="navegar('/qrreader')"
-              [disabled]="usuario.cuenta.trim() === ''">
-            <ion-icon slot="start" name="qr-code"></ion-icon>
-            Comienza escaneo QR
-      </ion-button>     
+      <ion-button #mensajeQR *ngIf="!escaneando" (click)="comenzarEscaneoQR()" shape="round" color="warning">
+        <ion-icon slot="start" name="videocam-outline"></ion-icon>
+        Comenzar Escaneo de QR
+      </ion-button>    
     </ion-row>
     </div>
 
 
+    <ion-toolbar class="ion-text-center">
+    
+      <ion-button shape="round" size="small" color="warning"
+          (click)="navegar('/inicio')">
+        <ion-icon slot="start" name="home"></ion-icon>
+        Inicio
+      </ion-button>
+      <ion-button shape="round" size="small" color="warning"
+          (click)="navegar('/misdatos')">
+          <ion-icon name="accessibility-outline"></ion-icon>
+        Mis Datos
+      </ion-button>
+      <ion-button shape="round" size="small" color="warning"
+          (click)="navegar('/login')">
+        <ion-icon slot="start" name="log-out"></ion-icon>
+        Salir
+      </ion-button>
+    </ion-toolbar>
+
   <ion-footer style="margin-top: auto;">
-    <ion-card>
-    <div class="enmarcar ion-text-center">
-      <img alt="DUOC" src="../../../assets/img/Logo_Duoc.png" style="height: 120px;"/> 
-    </div>
-    </ion-card>
   </ion-footer>
 
 </ion-content>   
