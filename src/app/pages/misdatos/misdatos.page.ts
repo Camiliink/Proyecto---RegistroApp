@@ -133,7 +133,10 @@ export class MisdatosPage implements AfterViewInit {
   navegar(pagina: string) {
     this.usuario.navegarEnviandousuario(this.router, pagina);
   }
-
+  
+  actualizarUsuario() {
+    this.usuario.actualizarUsuario();
+  }
 
 
 }

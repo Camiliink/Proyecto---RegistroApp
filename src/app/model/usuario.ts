@@ -1,6 +1,7 @@
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { NivelEducacional } from './nivel-educacional';
 import { Persona } from "./persona";
+import { Asistencia } from '../interfaces/asistencia';
 
 export class Usuario extends Persona {
 
@@ -9,6 +10,8 @@ export class Usuario extends Persona {
   public password: string;
   public preguntaSecreta: string;
   public respuestaSecreta: string;
+  public asistencia: Asistencia;
+  public listaUsuarios: Usuario[];
 
   constructor() {
     super();
@@ -21,6 +24,23 @@ export class Usuario extends Persona {
     this.apellido = '';
     this.nivelEducacional = NivelEducacional.buscarNivelEducacional(1)!;
     this.fechaNacimiento = undefined;
+    this.asistencia = this.asistenciaVacia();
+    this.listaUsuarios = [];
+  }
+
+  public asistenciaVacia(): Asistencia {
+    return {  
+      bloqueInicio: 0,
+      bloqueTermino: 0,
+      dia: '',
+      horaFin: '',
+      horaInicio: '',
+      idAsignatura: '',
+      nombreAsignatura: '',
+      nombreProfesor: '',
+      seccion: '',
+      sede: ''
+    };
   }
 
   public static getNewUsuario(
@@ -54,6 +74,10 @@ export class Usuario extends Persona {
   public static buscarUsuarioPorCorreo(correo: string): Usuario | undefined {
     return Usuario.getListaUsuarios().find(
       usu => usu.correo === correo);
+  }
+
+  public buscarUsuarioPorCuenta(cuenta: string): Usuario | undefined {
+    return Usuario.getListaUsuarios().find(usu => usu.cuenta === cuenta);
   }
 
   public validarCuenta(): string {
@@ -173,5 +197,20 @@ export class Usuario extends Persona {
       router.navigate([pagina], navigationExtras);
     else
       router.navigate([pagina]);
+  }
+
+  actualizarUsuario() {
+    const usu = this.buscarUsuarioPorCuenta(this.cuenta);
+    if (usu) {
+      usu.correo = this.correo;
+      usu.password = this.password;
+      usu.preguntaSecreta = this.preguntaSecreta;
+      usu.respuestaSecreta = this.respuestaSecreta;
+      usu.nombre = this.nombre;
+      usu.apellido = this.apellido;
+      usu.nivelEducacional = this.nivelEducacional;
+      usu.fechaNacimiento = this.fechaNacimiento;
+      usu.asistencia = this.asistencia;
+    }
   }
 }
