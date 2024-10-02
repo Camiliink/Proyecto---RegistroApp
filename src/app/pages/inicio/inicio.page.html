@@ -42,7 +42,7 @@
           </ion-button>
 
           <!-- Botón para detener el escaneo de QR si es necesario -->
-          <ion-button *ngIf="escaneando" (click)="detenerEscaneoQR()" shape="round"color="warning">
+          <ion-button *ngIf="escaneando" (click)="detenerEscaneoQR()" shape="round" color="warning">
             <ion-icon slot="start" name="stop-circle-outline"></ion-icon>
             Detener escaneo de QR
           </ion-button>
@@ -61,7 +61,7 @@
       <ion-icon name="accessibility-outline"></ion-icon>
       Mis Datos
     </ion-button>
-    <ion-button shape="round" size="small" color="warning" (click)="navegar('/inicio')">
+    <ion-button shape="round" size="small" color="warning" (click)="navegar('/miclases')">
       <ion-icon slot="start" name="book"></ion-icon>
       Mis clases
     </ion-button>

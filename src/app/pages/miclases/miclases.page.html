@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-title #titulo size="large" style="font-size: 20px; color: black">
+      Sistema de Asistencia DUOC UC
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Tarjeta para mostrar datos del QR escaneado -->
+  <ion-card *ngIf="asistencia">
+    <ion-card-header>
+      <ion-card-title>Datos de Asistencia</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <table class="tabla-asistencia">
+        <tbody>
+          <tr>
+            <td>Bloque Inicio:</td>
+            <td>{{ asistencia!.bloqueInicio }}</td>
+          </tr>
+          <tr>
+            <td>Bloque Término:</td>
+            <td>{{ asistencia!.bloqueTermino }}</td>
+          </tr>
+          <tr>
+            <td>Día:</td>
+            <td>{{ asistencia!.dia }}</td>
+          </tr>
+          <tr>
+            <td>Hora Inicio:</td>
+            <td>{{ asistencia!.horaInicio }}</td>
+          </tr>
+          <tr>
+            <td>Hora Fin:</td>
+            <td>{{ asistencia!.horaFin }}</td>
+          </tr>
+          <tr>
+            <td>ID Asignatura:</td>
+            <td>{{ asistencia!.idAsignatura }}</td>
+          </tr>
+          <tr>
+            <td>Nombre Asignatura:</td>
+            <td>{{ asistencia!.nombreAsignatura }}</td>
+          </tr>
+          <tr>
+            <td>Nombre Profesor:</td>
+            <td>{{ asistencia!.nombreProfesor }}</td>
+          </tr>
+          <tr>
+            <td>Sección:</td>
+            <td>{{ asistencia!.seccion }}</td>
+          </tr>
+          <tr>
+            <td>Sede:</td>
+            <td>{{ asistencia!.sede }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Tarjeta para cuando no hay datos de asistencia -->
+  <ion-card *ngIf="!asistencia">
+    <ion-card-header>
+      <ion-card-title>No se han escaneado datos.</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Aún no has escaneado un código QR o no se encontraron datos de asistencia.</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Navegación -->
+  <ion-toolbar class="ion-text-center">
+    <ion-button shape="round" size="small" color="warning" (click)="navegar('/inicio')">
+      <ion-icon slot="start" name="home"></ion-icon>
+      Inicio
+    </ion-button>
+    <ion-button shape="round" size="small" color="warning" (click)="navegar('/misdatos')">
+      <ion-icon name="accessibility-outline"></ion-icon>
+      Mis Datos
+    </ion-button>
+    <ion-button shape="round" size="small" color="warning" (click)="navegar('/miclases')">
+      <ion-icon slot="start" name="book"></ion-icon>
+      Mis clases
+    </ion-button>
+    <ion-button shape="round" size="small" color="warning" (click)="navegar('/login')">
+      <ion-icon slot="start" name="log-out"></ion-icon>
+      Salir
+    </ion-button>
+  </ion-toolbar>
+</ion-content>
