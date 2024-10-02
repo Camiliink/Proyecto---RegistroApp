@@ -191,6 +191,8 @@ export class Usuario extends Persona {
       state: {
         cuenta: this.cuenta,
         password: this.password,
+        listaUsuarios: this.listaUsuarios,
+        asistencia: this.asistencia
       }
     }
     if (this.cuenta !== '' && this.password !== '')

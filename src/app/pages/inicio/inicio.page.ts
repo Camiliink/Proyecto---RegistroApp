@@ -109,9 +109,11 @@ export class InicioPage implements AfterViewInit {
     }
     
     return false; // No se pudo escanear un QR
-}
+  }
 
   public detenerEscaneoQR(): void {
     this.escaneando = false;
   }
+  
+  
 }

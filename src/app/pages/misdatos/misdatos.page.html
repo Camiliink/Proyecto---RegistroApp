@@ -7,24 +7,6 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-toolbar  class="ion-text-center">
-    
-    <ion-button shape="round" size="small" color="warning"
-        (click)="navegar('/inicio')">
-      <ion-icon slot="start" name="home"></ion-icon>
-      Inicio
-    </ion-button>
-    <ion-button shape="round" size="small" color="warning"
-        (click)="navegar('/misdatos')">
-        <ion-icon name="accessibility-outline"></ion-icon>
-      Mis Datos
-    </ion-button>
-    
-    
-  </ion-toolbar>
-
-
-
   <div class="centrar">
     <div class="enmarcar ion-text-center" #page>
 
@@ -117,18 +99,32 @@
             placeholder="Ej: 1234 "></ion-input>
       </ion-item>
 
+      
+
+      <!-- Navegación -->
+    <ion-toolbar class="ion-text-center">
       <ion-button shape="round" size="small" color="warning"
           (click)="actualizarUsuario()">
+          <ion-icon slot="start" name="refresh"></ion-icon>
         Actualizar
       </ion-button>
-
-      <br>
-
-      <ion-button shape="round" size="small" color="warning"
-        (click)="navegar('/login')">
-      <ion-icon slot="start" name="log-out"></ion-icon>
-      Cerrar Sesion
-    </ion-button>
+      <ion-button shape="round" size="small" color="warning" (click)="navegar('/inicio')">
+        <ion-icon slot="start" name="home"></ion-icon>
+        Inicio
+      </ion-button>
+      <ion-button shape="round" size="small" color="warning" (click)="navegar('/misdatos')">
+        <ion-icon name="accessibility-outline"></ion-icon>
+        Mis Datos
+      </ion-button>
+      <ion-button shape="round" size="small" color="warning" (click)="navegar('/miclases')">
+        <ion-icon slot="start" name="book"></ion-icon>
+        Mis clases
+      </ion-button>
+      <ion-button shape="round" size="small" color="warning" (click)="navegar('/login')">
+        <ion-icon slot="start" name="log-out"></ion-icon>
+        Salir
+      </ion-button>
+    </ion-toolbar>
 
     </div>
   </div>

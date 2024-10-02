@@ -6,11 +6,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding-horizontal ion-text-center">
   <!-- Tarjeta para mostrar datos del QR escaneado -->
   <ion-card *ngIf="asistencia">
     <ion-card-header>
       <ion-card-title>Datos de Asistencia</ion-card-title>
+      <p>Has quedado presente en su clase!!!</p>
     </ion-card-header>
     <ion-card-content>
       <table class="tabla-asistencia">

@@ -38,3 +38,17 @@
   color: #000000; /* Color del texto en los encabezados (blanco) */
   text-align: left; /* Alineación a la izquierda para los encabezados */
 }
+
+ion-button {
+  transition: transform 0.2s ease; /* Transición suave para el cambio de tamaño */
+  margin: 0 10px; /* Añade margen horizontal entre los botones */
+}
+
+ion-button:hover {
+  transform: scale(1.1); /* Aumenta el tamaño al pasar el mouse */
+}
+
+/* Otras propiedades opcionales para un mejor efecto visual */
+ion-button:active {
+  transform: scale(0.95); /* Escala hacia abajo al hacer clic */
+}

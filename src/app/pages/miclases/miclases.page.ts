@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Usuario } from 'src/app/model/usuario';
 import { AnimationController, AlertController } from '@ionic/angular';
-import { Asistencia } from 'src/app/interfaces/asistencia'; // Asegúrate de que tienes el modelo Asistencia importado
+import { Asistencia } from 'src/app/interfaces/asistencia';
 
 @Component({
   selector: 'app-miclases',
@@ -27,7 +27,6 @@ export class MiclasesPage implements OnInit {
   ngOnInit() {
     const navigation = this.router.getCurrentNavigation();
     if (navigation && navigation.extras.state) {
-      // Accedemos al estado de la navegación
       const state = navigation.extras.state as { datosQR?: string };
       this.qrData = state.datosQR || null; // Acceso seguro a datosQR
       console.log('Datos QR:', this.qrData); // Muestra los datos en consola
@@ -37,6 +36,19 @@ export class MiclasesPage implements OnInit {
         this.procesarDatosQR(this.qrData);
       }
     }
+
+    // Agregar la clase 'show' a los botones después de un breve retraso
+    this.mostrarBotonesConAnimacion();
+  }
+
+  // Método para mostrar los botones con animación
+  private mostrarBotonesConAnimacion() {
+    setTimeout(() => {
+      const buttons = document.querySelectorAll('ion-button');
+      buttons.forEach((button) => {
+        button.classList.add('show'); // Agrega la clase 'show' a cada botón
+      });
+    }, 100); // Espera 100ms antes de mostrar los botones
   }
 
   // Método para procesar los datos QR y obtener la asistencia
@@ -60,8 +72,8 @@ export class MiclasesPage implements OnInit {
     await alert.present();
   }
 
+  // Método para navegar a otras páginas
   navegar(pagina: string) {
-    // Navega enviando información del usuario
     this.usuario.navegarEnviandousuario(this.router, pagina);
   }
 }

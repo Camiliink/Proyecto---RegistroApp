@@ -75,3 +75,17 @@ body {
   height: 100%;
   object-fit: cover; /* Ajusta la imagen para cubrir el espacio sin deformarse */
 }
+
+ion-button {
+  transition: transform 0.2s ease; /* Transición suave para el cambio de tamaño */
+  margin: 0 10px; /* Añade margen horizontal entre los botones */
+}
+
+ion-button:hover {
+  transform: scale(1.1); /* Aumenta el tamaño al pasar el mouse */
+}
+
+/* Otras propiedades opcionales para un mejor efecto visual */
+ion-button:active {
+  transform: scale(0.95); /* Escala hacia abajo al hacer clic */
+}
